@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "extends": ["airbnb", "plugin:jsx-a11y/strict", "prettier"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["jsx-a11y", "jest"],
+  "globals": {
+    "DEVELOPMENT": false,
+    "PRODUCTION": false,
+    "klokantech": false,
+    "Howl": false,
+    "map": false
+  },
+  "rules": {
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "global-require": "off",
+    "import/no-dynamic-require": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"]
+      }
+    ],
+    "linebreak-style": "off",
+    "no-nested-ternary": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-use-before-define": "off",
+    "no-shadow": "off",
+    "quotes": ["error", "single"],
+    "react/jsx-closing-bracket-location": [
+      "warn",
+      {
+        "nonEmpty": "after-props",
+        "selfClosing": "tag-aligned"
+      }
+    ],
+    "react/jsx-filename-extension": "off",
+    "react/no-typos": "off",
+    "react/require-default-props": "off"
+  }
+}
