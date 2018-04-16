@@ -18,8 +18,7 @@ class MainContainer extends Component {
   }
 }
 
-function mapStateToProps({ shared }) {
-  const { users, polls } = shared;
+function mapStateToProps({ users, polls }) {
   return {
     users,
     polls

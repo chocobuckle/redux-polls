@@ -1,4 +1,6 @@
 import { getInitialData } from 'utils/api';
+import { fetchUsersSuccess } from 'ducks/users';
+import { fetchPollsSuccess } from 'ducks/polls';
 
 const FETCH_INITAL_DATA = 'FETCH_INITAL_DATA';
 const FETCH_INITAL_DATA_ERROR = 'FETCH_INITAL_DATA_ERROR';
@@ -18,18 +20,23 @@ const fetchInitialDataError = (error) => ({
   error
 });
 
-const fetchInitialDataSuccess = ({ users, polls }) => ({
-  type: FETCH_INITAL_DATA_SUCCESS,
-  users,
-  polls
-});
+const fetchInitialDataSuccess = (data) => {
+  console.log(data);
+  return {
+    type: FETCH_INITAL_DATA_SUCCESS
+  }
+};
 
 export function handleInitialData() {
   return (dispatch) => {
     dispatch(fetchInitialData());
     getInitialData()
-      .then((usersAndPolls) => {
-        dispatch(fetchInitialDataSuccess(usersAndPolls));
+      .then(({ users, polls }) => {
+        Promise.all([
+          dispatch(fetchUsersSuccess(users)),
+          dispatch(fetchPollsSuccess(polls))
+        ])
+        .then(dispatch(fetchInitialDataSuccess()));
       })
       .catch((error) => dispatch(fetchInitialDataError(error)));
   };
@@ -52,9 +59,7 @@ export default function shared(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: '',
-        users: Object.assign({}, state.users, action.users),
-        polls: Object.assign({}, state.polls, action.polls)
+        error: ''
       };
     default:
       return state;
