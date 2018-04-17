@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { handleInitialData } from 'ducks/shared';
+import { Dashboard } from '.';
+
 
 class MainContainer extends Component {
   static propTypes = {};
@@ -10,19 +13,25 @@ class MainContainer extends Component {
   }
 
   render() {
-    const { users, polls } = this.props;
+    const { error, authedUser, users, polls } = this.props;
     const userArr = Object.values({ ...users });
-    return userArr.map((user) => (
-      <div key={user.id}>{`User name is ${user.name}, and id is ${user.id}`}</div>
-    ));
+    if (error) return <Error>ERROR!!!</Error>;
+    if (!authedUser) return <Loading>LOADING!!!</Loading>;
+    return <Dashboard />;
   }
 }
 
-function mapStateToProps({ users, polls }) {
+function mapStateToProps({ shared, users, polls, authedUser }) {
+  const { error } = shared;
   return {
-    users,
-    polls
+    error,
+    authedUser,
+    polls,
+    users
   };
 }
+
+const Error = styled.div``;
+const Loading = styled.div``;
 
 export default connect(mapStateToProps)(MainContainer);

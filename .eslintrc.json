@@ -27,6 +27,7 @@
     "import/no-extraneous-dependencies": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
+    "import/prefer-default-export": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
@@ -50,6 +51,7 @@
     ],
     "react/jsx-filename-extension": "off",
     "react/no-typos": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/prefer-stateless-function": "off"
   }
 }

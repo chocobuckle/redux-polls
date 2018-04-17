@@ -1,13 +1,14 @@
 import { getInitialData } from 'utils/api';
 import { fetchUsersSuccess } from 'ducks/users';
 import { fetchPollsSuccess } from 'ducks/polls';
+import { setAuthedUser } from 'ducks/authedUser';
 
 const FETCH_INITAL_DATA = 'FETCH_INITAL_DATA';
 const FETCH_INITAL_DATA_ERROR = 'FETCH_INITAL_DATA_ERROR';
 const FETCH_INITAL_DATA_SUCCESS = 'FETCH_INITAL_DATA_SUCCESS';
 
 const initialState = {
-  isFetching: false,
+  isFetching: true,
   error: ''
 };
 
@@ -20,12 +21,9 @@ const fetchInitialDataError = (error) => ({
   error
 });
 
-const fetchInitialDataSuccess = (data) => {
-  console.log(data);
-  return {
-    type: FETCH_INITAL_DATA_SUCCESS
-  }
-};
+const fetchInitialDataSuccess = () => ({
+  type: FETCH_INITAL_DATA_SUCCESS
+});
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -36,7 +34,8 @@ export function handleInitialData() {
           dispatch(fetchUsersSuccess(users)),
           dispatch(fetchPollsSuccess(polls))
         ])
-        .then(dispatch(fetchInitialDataSuccess()));
+          .then(dispatch(fetchInitialDataSuccess()))
+          .then(dispatch(setAuthedUser('tylermcginnis')));
       })
       .catch((error) => dispatch(fetchInitialDataError(error)));
   };
