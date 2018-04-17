@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { handleInitialData } from 'ducks/shared';
-import { Dashboard } from '.';
+import { DashboardContainer } from 'containers';
 
 
 class MainContainer extends Component {
@@ -13,11 +13,10 @@ class MainContainer extends Component {
   }
 
   render() {
-    const { error, authedUser, users, polls } = this.props;
-    const userArr = Object.values({ ...users });
+    const { error, authedUser } = this.props;
     if (error) return <Error>ERROR!!!</Error>;
     if (!authedUser) return <Loading>LOADING!!!</Loading>;
-    return <Dashboard />;
+    return <DashboardContainer />;
   }
 }
 
