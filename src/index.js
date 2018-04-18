@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import * as reducers from 'ducks';
+import * as reducers from './ducks';
 import './index.css';
 import App from './App';
 
@@ -26,8 +26,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default; // eslint-disable-line global-require
+  module.hot.accept('./App.js', () => {
+    const NextApp = require('./App.js').default; // eslint-disable-line global-require
     ReactDOM.render(<NextApp />, rootEl);
   });
 }

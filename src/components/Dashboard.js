@@ -1,5 +1,4 @@
 import React from 'react';
-import {} from 'prop-types';
 import styled from 'styled-components';
 
 Dashboard.propTypes = {};

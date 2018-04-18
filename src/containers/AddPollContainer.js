@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {  } from 'prop-types';
 
 class AddPollContainer extends Component {
-  static propTypes = {
-
-  };
-
   state = {
 
   };

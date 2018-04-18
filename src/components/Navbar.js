@@ -23,6 +23,7 @@ function Navbar() {
 
 const List = styled.ul`
   display: flex;
+  margin-top: 0;
 `;
 
 const ListItem = styled.li``;

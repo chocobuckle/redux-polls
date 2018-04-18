@@ -3,13 +3,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import LoadingBar from 'react-redux-loading';
 import { connect } from 'react-redux';
-import { Navbar } from 'components';
+import { Navbar } from './components';
 import {
   DashboardContainer,
   LeaderboardContainer,
   AddPollContainer
-} from 'containers';
-import { handleInitialData } from 'ducks/shared';
+} from './containers';
+import { handleInitialData } from './ducks/shared';
 
 const Wrapper = styled.div`
   display: flex;

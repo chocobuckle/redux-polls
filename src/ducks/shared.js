@@ -1,8 +1,8 @@
-import { getInitialData } from 'utils/api';
-import { fetchUsersSuccess } from 'ducks/users';
-import { fetchPollsSuccess } from 'ducks/polls';
-import { setAuthedUser } from 'ducks/authedUser';
 import { showLoading, hideLoading } from 'react-redux-loading';
+import { getInitialData } from '../utils/api';
+import { fetchUsersSuccess } from '../ducks/users';
+import { fetchPollsSuccess } from '../ducks/polls';
+import { setAuthedUser } from '../ducks/authedUser';
 
 const FETCH_INITAL_DATA = 'FETCH_INITAL_DATA';
 const FETCH_INITAL_DATA_ERROR = 'FETCH_INITAL_DATA_ERROR';
