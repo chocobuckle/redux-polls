@@ -13,9 +13,9 @@ class MainContainer extends Component {
   }
 
   render() {
-    const { error, authedUser } = this.props;
+    const { error, loading } = this.props;
     if (error) return <Error>ERROR!!!</Error>;
-    if (!authedUser) return <Loading>LOADING!!!</Loading>;
+    if (loading) return null;
     return <DashboardContainer />;
   }
 }
@@ -24,7 +24,7 @@ function mapStateToProps({ shared, users, polls, authedUser }) {
   const { error } = shared;
   return {
     error,
-    authedUser,
+    loading: authedUser === null,
     polls,
     users
   };

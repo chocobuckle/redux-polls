@@ -2,6 +2,7 @@ import { getInitialData } from 'utils/api';
 import { fetchUsersSuccess } from 'ducks/users';
 import { fetchPollsSuccess } from 'ducks/polls';
 import { setAuthedUser } from 'ducks/authedUser';
+import { showLoading, hideLoading } from 'react-redux-loading';
 
 const FETCH_INITAL_DATA = 'FETCH_INITAL_DATA';
 const FETCH_INITAL_DATA_ERROR = 'FETCH_INITAL_DATA_ERROR';
@@ -28,6 +29,7 @@ const fetchInitialDataSuccess = () => ({
 export function handleInitialData() {
   return (dispatch) => {
     dispatch(fetchInitialData());
+    dispatch(showLoading());
     getInitialData()
       .then(({ users, polls }) => {
         Promise.all([
@@ -35,7 +37,8 @@ export function handleInitialData() {
           dispatch(fetchPollsSuccess(polls))
         ])
           .then(dispatch(fetchInitialDataSuccess()))
-          .then(dispatch(setAuthedUser('tylermcginnis')));
+          .then(dispatch(setAuthedUser('tylermcginnis')))
+          .then(dispatch(hideLoading()));
       })
       .catch((error) => dispatch(fetchInitialDataError(error)));
   };

@@ -1,55 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {} from 'prop-types';
 import { Dashboard } from 'components';
-import { showAnsweredPolls, showUnansweredPolls } from 'ducks/dashboard';
 
 class DashboardContainer extends Component {
-  static propTypes = {};
-
-  handleShowAnsweredPollsClick = () => {
-    this.props.dispatch(showAnsweredPolls());
+  state = {
+    showAnsweredPolls: false
   };
 
-  handleShowUnansweredPollsClick = () => {
-    this.props.dispatch(showUnansweredPolls());
+  handleShowAnsweredPolls = () => {
+    this.setState({
+      showAnsweredPolls: true
+    });
+  };
+
+  handleShowUnansweredPolls = () => {
+    this.setState({
+      showAnsweredPolls: false
+    });
   };
 
   render() {
-    const {
-      showAnsweredPolls,
-      showUnansweredPolls,
-      usersAnsweredPolls,
-      usersUnansweredPolls
-    } = this.props;
+    const { showAnsweredPolls } = this.state;
+    const { usersAnsweredPolls, usersUnansweredPolls } = this.props;
+    const pollsList = showAnsweredPolls
+      ? usersAnsweredPolls
+      : usersUnansweredPolls;
     return (
       <Dashboard
-        handleShowAnsweredPollsClick={this.handleShowAnsweredPollsClick}
-        handleShowUnansweredPollsClick={this.handleShowUnansweredPollsClick}
+        handleShowAnsweredPolls={this.handleShowAnsweredPolls}
+        handleShowUnansweredPolls={this.handleShowUnansweredPolls}
+        pollsList={pollsList}
         showAnsweredPolls={showAnsweredPolls}
-        showUnansweredPolls={showUnansweredPolls}
-        usersAnsweredPolls={usersAnsweredPolls}
-        usersUnansweredPolls={usersUnansweredPolls}
       />
     );
   }
 }
 
-function mapStateToProps({ users, polls, authedUser, dashboard }) {
+function mapStateToProps({ users, polls, authedUser }) {
   if (authedUser) {
     const { answers } = users[authedUser];
-    const { showAnsweredPolls, showUnansweredPolls } = dashboard;
-    const usersPollIDArr = Object.values({ ...answers });
-    const pollArr = Object.values({ ...polls });
-    const usersAnsweredPolls = pollArr.filter((poll) =>
-      usersPollIDArr.includes(poll.id)
-    );
-    const usersUnansweredPolls = pollArr.filter(
-      (poll) => !usersPollIDArr.includes(poll.id)
-    );
+    const usersAnsweredPolls = answers
+      .map((id) => polls[id])
+      .sort((a, b) => b.timestamp - a.timestamp);
+    const usersUnansweredPolls = Object.keys(polls)
+      .filter((id) => !answers.includes(id))
+      .map((id) => polls[id])
+      .sort((a, b) => b.timestamp - a.timestamp);
     return {
-      showAnsweredPolls,
-      showUnansweredPolls,
       usersAnsweredPolls,
       usersUnansweredPolls
     };
