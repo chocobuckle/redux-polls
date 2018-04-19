@@ -5,7 +5,7 @@
     "es6": true,
     "jest/globals": true
   },
-  "extends": ["airbnb", "plugin:jsx-a11y/strict", "prettier"],
+  "extends": ["airbnb", "prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
@@ -13,7 +13,7 @@
       "jsx": true
     }
   },
-  "plugins": ["jsx-a11y", "jest"],
+  "plugins": ["jest"],
   "globals": {
     "DEVELOPMENT": false,
     "PRODUCTION": false,
@@ -22,10 +22,10 @@
     "map": false
   },
   "rules": {
+    "global-require": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
-    "global-require": "off",
     "import/no-dynamic-require": "off",
     "import/prefer-default-export": "off",
     "jsx-a11y/anchor-is-valid": [
@@ -39,10 +39,10 @@
     "no-nested-ternary": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-use-before-define": "off",
+    "no-return-assign": "off",
     "no-shadow": "off",
+    "no-use-before-define": "off",
     "quotes": ["error", "single"],
-    "react/prop-types": "off",
     "react/jsx-closing-bracket-location": [
       "warn",
       {
@@ -52,7 +52,8 @@
     ],
     "react/jsx-filename-extension": "off",
     "react/no-typos": "off",
-    "react/require-default-props": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

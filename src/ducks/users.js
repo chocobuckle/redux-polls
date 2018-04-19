@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+import { ADD_POLL } from './polls';
 const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
 const initialState = {};
@@ -15,6 +16,17 @@ export default function users(state = initialState, action) {
         ...state,
         ...action.users
       };
+    case ADD_POLL: {
+      const { poll } = action;
+      const { author, id } = poll;
+      return {
+        ...state,
+        [author]: {
+          ...state[author],
+          polls: state[author].polls.concat([id])
+        }
+      };
+    }
     default:
       return state;
   }
