@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Poll } from '../components';
+const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
-class Poll extends Component {
+class PollContainer extends Component {
+  handleAnswer = (answer) => {
+    const { poll, authedUser } = this.props
+    this.answered = true
+
+    console.log('Add Answer:', answer)
+  }
+
   render() {
-    return <div className="poll-container">{JSON.stringify(this.props)}</div>;
+    if (this.props.poll === null) {
+      return <p>This poll does not exist</p>;
+    }
+
+    const { poll, vote, authorAvatar } = this.props;
+
+    const totalVotes = getVoteKeys().reduce(
+      (total, key) => total + poll[key].length,
+      0
+    );
+    return (
+      <Poll
+        answered={this.answered}
+        handleAnswer={this.handleAnswer}
+        poll={poll}
+        vote={vote}
+        authorAvatar={authorAvatar}
+        totalVotes={totalVotes}
+      />
+    );
   }
 }
 
@@ -33,4 +61,4 @@ function mapStateToProps({ authedUser, polls, users }, { match }) {
   };
 }
 
-export default connect(mapStateToProps)(Poll);
+export default connect(mapStateToProps)(PollContainer);
