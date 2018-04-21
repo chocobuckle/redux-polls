@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { getPercentage } from '../utils/helpers';
 
 function Poll({

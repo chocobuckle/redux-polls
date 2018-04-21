@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 Dashboard.propTypes = {};
 
@@ -22,7 +23,13 @@ function Dashboard({
         showAnsweredPolls={showAnsweredPolls}>
         Answered
       </Answered>
-      <ul>{pollsList.map((poll) => <li key={poll.id}>{poll.question}</li>)}</ul>
+      <ul>
+        {pollsList.map((poll) => (
+          <Question key={poll.id}>
+            <Link to={`polls/${poll.id}`}>{poll.question}</Link>
+          </Question>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -31,6 +38,12 @@ const Button = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+`;
+
+const Question = styled.li`
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 const Unanswered = Button.extend`

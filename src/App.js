@@ -5,9 +5,10 @@ import LoadingBar from 'react-redux-loading';
 import { connect } from 'react-redux';
 import { Navbar } from './components';
 import {
+  AddPollContainer,
   DashboardContainer,
   LeaderboardContainer,
-  AddPollContainer
+  PollContainer
 } from './containers';
 import { handleInitialData } from './ducks/shared';
 
@@ -44,6 +45,7 @@ class App extends Component {
                 component={LeaderboardContainer}
               />
               <Route exact path="/add" component={AddPollContainer} />
+              <Route exact path="/polls/:id" component={PollContainer} />
               <Route render={() => <p>Page Not Found!</p>} />
             </Switch>
           )}
