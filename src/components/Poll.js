@@ -21,6 +21,7 @@ function Poll({
           const count = poll[`${key[0]}Votes`].length;
           return (
             <li
+              key={key}
               onClick={() => {
                 if (vote === null && !answered) {
                   handleAnswer(key[0]);

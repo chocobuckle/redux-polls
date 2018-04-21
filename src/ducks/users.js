@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
-import { ADD_POLL } from './polls';
+import { ADD_POLL, ADD_ANSWER } from './polls';
+
 const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
 const initialState = {};
@@ -26,6 +27,16 @@ export default function users(state = initialState, action) {
           polls: state[author].polls.concat([id])
         }
       };
+    }
+    case ADD_ANSWER: {
+      const user = state[action.authedUser]
+      return {
+        ...state,
+        [action.authedUser]: {
+          ...user,
+          answers: user.answers.concat([action.id])
+        }
+      }
     }
     default:
       return state;

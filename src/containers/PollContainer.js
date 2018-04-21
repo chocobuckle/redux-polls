@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Poll } from '../components';
+import { handleAddAnswer } from '../ducks/polls';
+
 const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
 class PollContainer extends Component {
@@ -8,7 +10,11 @@ class PollContainer extends Component {
     const { poll, authedUser } = this.props
     this.answered = true
 
-    console.log('Add Answer:', answer)
+    this.props.dispatch(handleAddAnswer({
+      authedUser,
+      answer,
+      id: poll.id,
+    }))
   }
 
   render() {
